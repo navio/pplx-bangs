@@ -36,7 +36,7 @@ export default {
     ): Promise<Response> {
       const query = url.searchParams.get("q");
 
-      let redirectUrl = new URL("https://www.perplexity.ai/search");
+      let redirectUrl = new URL("https://duckduckgo.com/");
 
       const swapLastQuery = async (query: string) => {
         if (query?.includes("!!")) {
@@ -55,20 +55,20 @@ export default {
           redirectUrl = new URL("https://www.google.com/search");
           redirectUrl.searchParams.set(
             "q",
-            await swapLastQuery(query.replace("!g", ""))
+            await swapLastQuery(query.replace("!g ", ""))
           );
         } else if (query.includes("!p")) {
           redirectUrl = new URL("https://www.perplexity.ai/search");
           redirectUrl.searchParams.set(
             "q",
-            await swapLastQuery(query.replace("!p", ""))
+            await swapLastQuery(query.replace("!p ", ""))
           );
           redirectUrl.searchParams.set("copilot", "true");
         } else if (query.includes("!m")) {
           redirectUrl = new URL("https://metaphor.systems/search");
           redirectUrl.searchParams.set(
             "q",
-            await swapLastQuery(query.replace("!m", ""))
+            await swapLastQuery(query.replace("!m ", ""))
           );
         } else {
           redirectUrl.searchParams.set("q", await swapLastQuery(query));
