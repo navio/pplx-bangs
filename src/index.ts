@@ -67,7 +67,7 @@ export default {
           redirectUrl = new URL("https://www.perplexity.ai/search");
           redirectUrl.searchParams.set(
             "q",
-            await swapLastQuery(query.replace("!p ", ""))
+            await swapLastQuery(query.replace("!pc ", ""))
           );
           redirectUrl.searchParams.set("copilot", "true");
         } else if (query.includes("!m ")) {
