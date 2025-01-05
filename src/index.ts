@@ -51,30 +51,23 @@ export default {
       };
 
       if (query) {
-        if (query.includes("!g ")) {
+        if (query.includes("!g")) {
           redirectUrl = new URL("https://www.google.com/search");
           redirectUrl.searchParams.set(
             "q",
-            await swapLastQuery(query.replace("!g ", ""))
+            await swapLastQuery(query.replace(/!p\s?/, ""))
           );
-        } else if (query.includes("!p ")) {
+        } else if (query.includes("!p")) {
           redirectUrl = new URL("https://www.perplexity.ai/search");
           redirectUrl.searchParams.set(
             "q",
-            await swapLastQuery(query.replace("!p ", ""))
+            await swapLastQuery(query.replace(/!p\s?/, ""))
           );
-        } else if (query.includes("!pc ")) {
-          redirectUrl = new URL("https://www.perplexity.ai/search");
-          redirectUrl.searchParams.set(
-            "q",
-            await swapLastQuery(query.replace("!pc ", ""))
-          );
-          redirectUrl.searchParams.set("copilot", "true");
-        } else if (query.includes("!m ")) {
+        } else if (query.includes("!m")) {
           redirectUrl = new URL("https://metaphor.systems/search");
           redirectUrl.searchParams.set(
             "q",
-            await swapLastQuery(query.replace("!m ", ""))
+            await swapLastQuery(query.replace(/!m\s?/, ""))
           );
         } else {
           redirectUrl.searchParams.set("q", await swapLastQuery(query));
