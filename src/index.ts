@@ -63,11 +63,11 @@ export default {
             "q",
             await swapLastQuery(query.replace(/!p\s?/, ""))
           );
-        } else if (query.includes("!m")) {
+        } else if (query.includes("!met")) {
           redirectUrl = new URL("https://metaphor.systems/search");
           redirectUrl.searchParams.set(
             "q",
-            await swapLastQuery(query.replace(/!m\s?/, ""))
+            await swapLastQuery(query.replace(/!met\s?/, ""))
           );
         } else {
           redirectUrl.searchParams.set("q", await swapLastQuery(query));
