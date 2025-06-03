@@ -36,8 +36,7 @@ export default {
     ): Promise<Response> {
       const query = url.searchParams.get("q");
 
-      let redirectUrl = new URL("https://duckduckgo.com/");
-
+      let redirectUrl = new URL("https://kagi.com/search");
       const swapLastQuery = async (query: string) => {
         if (query?.includes("!!")) {
           const lastQuery = await env.QUERY_CACHE.get("last");
@@ -62,6 +61,18 @@ export default {
           redirectUrl.searchParams.set(
             "q",
             await swapLastQuery(query.replace(/!p\s?/, ""))
+          );
+        } else if (query.startsWith("! ") || query.endsWith(" !") || query.includes(" ! ")) {
+          redirectUrl = new URL("https://duckduckgo.com/");
+          redirectUrl.searchParams.set(
+            "q",
+            query
+          );
+        } else if (query.includes("!d")) {
+          redirectUrl = new URL("https://duckduckgo.com/");
+          redirectUrl.searchParams.set(
+            "d",
+            await swapLastQuery(query.replace(/!d\s?/, ""))
           );
         } else if (query.includes("!met")) {
           redirectUrl = new URL("https://metaphor.systems/search");
